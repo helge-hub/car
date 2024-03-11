@@ -73,7 +73,7 @@ if(isset($_POST['search'])){
     
   
   //4. gets all products
-  $stmt2 = $conn->prepare("SELECT * from cars group by car_name limit $offset,$total_records_per_page");
+  $stmt2 = $conn->prepare("SELECT * from cars  limit $offset,$total_records_per_page");
   $stmt2->execute();
   $products = $stmt2->get_result();
 

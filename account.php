@@ -31,7 +31,7 @@ if(!isset($_SESSION['logged_in'])){
       $category = $_POST['category'];
        
 
-      $stmt2 = $conn->prepare("SELECT COUNT(*) from cars  where car_type=? group by car_name");
+      $stmt2 = $conn->prepare("SELECT COUNT(*) from cars  where car_type=?");
       $stmt2->bind_param("s",$category);
       $stmt2->execute();
       $stmt2->bind_result($num_rows);
@@ -326,7 +326,7 @@ require 'phpmailer/src/SMTP.php';
 if($_SESSION['nbrs']==1){ ?>
 
 
- <?php $stmt2 = $conn->prepare("SELECT * from cars  where car_type=? group by car_name");
+ <?php $stmt2 = $conn->prepare("SELECT * from cars  where car_type=?");
     $stmt2->bind_param("s",$category);
     $stmt2->execute();
     $products6 = $stmt2->get_result();

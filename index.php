@@ -7,7 +7,7 @@ $stmt2 = $conn->prepare("SELECT * from comment where comment_status=1");
 $stmt2->execute();
 $products = $stmt2->get_result();
 
-$stmt3 = $conn->prepare("SELECT * from cars where 1  group by car_name ORDER BY RAND() limit 6");
+$stmt3 = $conn->prepare("SELECT * from cars ORDER BY RAND() limit 6");
 $stmt3->execute();
 $products1 = $stmt3->get_result();
 
