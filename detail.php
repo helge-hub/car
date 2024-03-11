@@ -13,7 +13,7 @@ if(isset($_GET['id'])){
   $cars = $stmt->get_result();
   
 
-            $stmt5 = $conn->prepare("SELECT * FROM cars WHERE car_type=? group by car_name ORDER BY RAND()  limit 4 ");
+            $stmt5 = $conn->prepare("SELECT * FROM cars WHERE car_type=? ORDER BY RAND()  limit 4 ");
             $stmt5->bind_param("s",$car_category);
 
             $stmt5->execute();
@@ -63,7 +63,7 @@ if(isset($_POST['search'])){
      
   
       $category = $_POST['category'];
-      $stmt1 = $conn->prepare('SELECT COUNT(*) AS total_records FROM cars  where car_type=? group by car_name');
+      $stmt1 = $conn->prepare('SELECT COUNT(*) AS total_records FROM cars  where car_type=?');
       $stmt1->bind_param('s',$category);
       $stmt1->execute();
       $stmt1->bind_result($total_records);
@@ -80,7 +80,7 @@ if(isset($_POST['search'])){
   
     $total_no_of_pages = ceil($total_records/$total_records_per_page);
   
-    $stmt2 = $conn->prepare("SELECT * from cars  where car_type=? group by car_name limit $offset,$total_records_per_page");
+    $stmt2 = $conn->prepare("SELECT * from cars  where car_type=? limit $offset,$total_records_per_page");
     $stmt2->bind_param("s",$category);
     $stmt2->execute();
     $products = $stmt2->get_result();
@@ -99,7 +99,7 @@ if(isset($_POST['search'])){
    }
   
   // return number of products 
-   $stmt1 = $conn->prepare("SELECT COUNT(*) AS total_records FROM cars group by car_name");
+   $stmt1 = $conn->prepare("SELECT COUNT(*) AS total_records FROM cars ");
   
     $stmt1->execute();
   
@@ -124,7 +124,7 @@ if(isset($_POST['search'])){
     
   
   //4. gets all products
-  $stmt2 = $conn->prepare("SELECT * from cars group by car_name limit $offset,$total_records_per_page");
+  $stmt2 = $conn->prepare("SELECT * from cars  limit $offset,$total_records_per_page");
   $stmt2->execute();
   $products = $stmt2->get_result();
 
