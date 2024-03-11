@@ -117,7 +117,7 @@ $reservation_date_drop =$datedrop;
       $price_car =$row['car_price'];
       $car_name =$row['car_name'];
   }
-  $total = $price_car*$durtion;
+  $total = $price_car*$durtion1;
 
 
 
