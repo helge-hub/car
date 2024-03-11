@@ -129,7 +129,7 @@ $reservation_date_drop =$datedrop;
   if($stmt->execute()){
 
     // get id reservation max
-    $stmt5 = $conn->prepare("SELECT Max(reservation_id) AS idmax FROM reservation WHERE user_id=? LIMIT 1");
+    $stmt5 = $conn->prepare("SELECT car_id,Max(reservation_id) AS idmax FROM reservation WHERE user_id=? LIMIT 1");
     $stmt5->bind_param("i",$_SESSION['user_id']);
     $stmt5->execute();
     $idMax = $stmt5->get_result();
