@@ -16,7 +16,7 @@ $stmt2->execute();
 $products = $stmt2->get_result();
 
 
-$stmt3 = $conn->prepare("SELECT EXTRACT(MONTH FROM reservation_date)AS mois,SUM(amount)AS ttc,CASE WHEN EXTRACT(MONTH FROM reservation_date)=1 THEN 'janivier' WHEN EXTRACT(MONTH FROM reservation_date)=2 THEN 'fevrier' WHEN EXTRACT(MONTH FROM reservation_date)=3 THEN 'mars' WHEN EXTRACT(MONTH FROM reservation_date)=4 THEN 'Avril' WHEN EXTRACT(MONTH FROM reservation_date)=5 THEN 'Mai' WHEN EXTRACT(MONTH FROM reservation_date)=6 THEN 'Juin' WHEN EXTRACT(MONTH FROM reservation_date)=7 THEN 'Juillet' WHEN EXTRACT(MONTH FROM reservation_date)=8 THEN 'Aout' WHEN EXTRACT(MONTH FROM reservation_date)=9 THEN 'Sptemebre' WHEN EXTRACT(MONTH FROM reservation_date)=10 THEN 'Octobre' WHEN EXTRACT(MONTH FROM reservation_date)=11 THEN 'Novembre' WHEN EXTRACT(MONTH FROM reservation_date)=12 THEN 'Décembre' END AS nom FROM reservation WHERE 1 GROUP BY mois ORDER by mois;");
+$stmt3 = $conn->prepare("SELECT EXTRACT(MONTH FROM reservation_date)AS mois,SUM(amount)AS ttc,CASE WHEN EXTRACT(MONTH FROM reservation_date)=1 THEN 'janivier' WHEN EXTRACT(MONTH FROM reservation_date)=2 THEN 'fevrier' WHEN EXTRACT(MONTH FROM reservation_date)=3 THEN 'mars' WHEN EXTRACT(MONTH FROM reservation_date)=4 THEN 'Avril' WHEN EXTRACT(MONTH FROM reservation_date)=5 THEN 'Mai' WHEN EXTRACT(MONTH FROM reservation_date)=6 THEN 'Juin' WHEN EXTRACT(MONTH FROM reservation_date)=7 THEN 'Juillet' WHEN EXTRACT(MONTH FROM reservation_date)=8 THEN 'Aout' WHEN EXTRACT(MONTH FROM reservation_date)=9 THEN 'Sptemebre' WHEN EXTRACT(MONTH FROM reservation_date)=10 THEN 'Octobre' WHEN EXTRACT(MONTH FROM reservation_date)=11 THEN 'Novembre' WHEN EXTRACT(MONTH FROM reservation_date)=12 THEN 'Décembre' END AS nom FROM reservation  ORDER by mois;");
 
 
 $stmt3->execute();
@@ -33,7 +33,7 @@ while($row=$total_ca->fetch_assoc())
 
 
 
-$stmt41 = $conn->prepare("SELECT COUNT(reservation_id)as co,mode FROM `reservation` WHERE 1 GROUP BY mode");
+$stmt41 = $conn->prepare("SELECT COUNT(reservation_id)as co,mode FROM `reservation`  GROUP BY mode");
 
 
 $stmt41->execute();
