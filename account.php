@@ -129,13 +129,13 @@ $reservation_date_drop =$datedrop;
   if($stmt->execute()){
 
     // get id reservation max
-    $stmt5 = $conn->prepare("SELECT car_id,Max(reservation_id) AS idmax FROM reservation WHERE user_id=? LIMIT 1");
+    $stmt5 = $conn->prepare("SELECT Max(reservation_id)AS idmax FROM reservation WHERE user_id=?;");
     $stmt5->bind_param("i",$_SESSION['user_id']);
     $stmt5->execute();
     $idMax = $stmt5->get_result();
     while($row1 = $idMax->fetch_assoc()){
         $reservation_idmax =$row1['idmax'];
-        $car_id=$row1['car_id'];
+       
     }
 
 //end to get id reservation code
@@ -144,7 +144,7 @@ $reservation_date_drop =$datedrop;
     
       $_SESSION['car_date_drop']=$reservation_date_drop;
       $_SESSION['reservation_id']=$reservation_idmax;
-      $_SESSION['car_id']=$car_id;
+      $_SESSION['car_id']=$carId;
       $_SESSION['sub']=$amount;
       $_SESSION['trans']=$id_transaction;
 //mail for customer
