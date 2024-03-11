@@ -134,7 +134,8 @@ $reservation_date_drop =$datedrop;
     $stmt5->execute();
     $idMax = $stmt5->get_result();
     while($row1 = $idMax->fetch_assoc()){
-        $reservation_idmax =$row['idmax'];
+        $reservation_idmax =$row1['idmax'];
+        $car_id=$row1['car_id'];
     }
 
 //end to get id reservation code
