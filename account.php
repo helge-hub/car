@@ -124,7 +124,7 @@ $reservation_date_drop =$datedrop;
   $stmt = $conn->prepare("INSERT INTO reservation (reservation_date, reservation_date_drop, reservation_pickup, car_id, user_id, reservation_status, heure_pickup, duration, description,amount)
                                                 VALUES(?,?,?,?,?,?,?,?,?,?)");
 
-  $stmt->bind_param('sssiissssi',$reservation_date,$reservation_date_drop,$date_reservation_final,$carId,$user_id,$eservation_status,$reservation_time,$durtion,$description,$amount);
+  $stmt->bind_param('sssiissssi',$reservation_date,$reservation_date_drop,$date_reservation_final,$carId,$user_id,$eservation_status,$reservation_time,$durtion1,$description,$amount);
 
   if($stmt->execute()){
 
