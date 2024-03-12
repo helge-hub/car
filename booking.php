@@ -19,7 +19,7 @@ if(!isset($_SESSION['logged_in'])){
        
     
         $category = $_POST['category'];
-        $stmt1 = $conn->prepare('SELECT COUNT(*) AS total_records FROM cars  where car_type=? group by car_name');
+        $stmt1 = $conn->prepare('SELECT COUNT(*) AS total_records FROM cars  where car_type=?');
         $stmt1->bind_param('s',$category);
         $stmt1->execute();
         $stmt1->bind_result($total_records);
@@ -36,7 +36,7 @@ if(!isset($_SESSION['logged_in'])){
     
       $total_no_of_pages = ceil($total_records/$total_records_per_page);
     
-      $stmt2 = $conn->prepare("SELECT * from cars  where car_type=? group by car_name limit $offset,$total_records_per_page");
+      $stmt2 = $conn->prepare("SELECT * from cars  where car_type=?  limit $offset,$total_records_per_page");
       $stmt2->bind_param("s",$category);
       $stmt2->execute();
       $products = $stmt2->get_result();
@@ -55,7 +55,7 @@ if(!isset($_SESSION['logged_in'])){
      }
     
     // return number of products 
-     $stmt1 = $conn->prepare("SELECT COUNT(*) AS total_records FROM cars group by car_name");
+     $stmt1 = $conn->prepare("SELECT COUNT(*) AS total_records FROM cars ");
     
       $stmt1->execute();
     
@@ -80,7 +80,7 @@ if(!isset($_SESSION['logged_in'])){
       
     
     //4. gets all products
-    $stmt2 = $conn->prepare("SELECT * from cars group by car_name limit $offset,$total_records_per_page");
+    $stmt2 = $conn->prepare("SELECT * from cars limit $offset,$total_records_per_page");
     $stmt2->execute();
     $products = $stmt2->get_result();
   
@@ -158,7 +158,7 @@ $reservation_date_drop =$datedrop;
     if($stmt->execute()){
     
         // get id reservation max
-            $stmt5 = $conn->prepare("SELECT Max(reservation_id)AS idmax FROM reservation WHERE user_id=? LIMIT 1");
+            $stmt5 = $conn->prepare("SELECT Max(reservation_id)AS idmax FROM reservation WHERE user_id=?");
             $stmt5->bind_param("i",$_SESSION['user_id']);
             $stmt5->execute();
             $idMax = $stmt5->get_result();
