@@ -146,7 +146,7 @@ $reservation_date_drop =$datedrop;
     while($row = $cars->fetch_assoc()){
         $price_car =$row['car_price'];
     }
-    $total = $price_car*$durtion;
+    $total = $price_car*$durtion1;
 
 
 
