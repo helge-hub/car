@@ -143,7 +143,7 @@ $partener = $stmt1->get_result();
                                 </div>
                                 <div class="form-group mt-2">
                                     <label>Partener</label>
-                                    <select class="form-select form-select-lg mb-3" aria-label="Large select example" name="car_partener">
+                                    <select class="form-select form-select-lg mb-3" aria-label="Large select example" name="partener_id">
                                     
                                         <?php  foreach($partener as $partener){  ?>
                                         <option  value="<?php echo $partener['partener_id']; ?>"><?php  echo $partener['partener_name'] ;?></option>

@@ -43,7 +43,7 @@ if(isset($_POST['create_product'])){
     $stmt = $conn->prepare("INSERT INTO cars (car_name, car_model, car_type, car_km, car_gps, car_image1, car_image2, car_image3, car_image4, car_drop_date, car_status, car_price,an,trans,car_autoradio,car_sit,partener_id)
                                                   VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 
-    $stmt->bind_param('sssssssssssisssis',$car_name,$car_description,$car_type,$car_km,$car_gps,$image_name1,$image_name2,$image_name3,$image_name4,$car_date_drop,$car_status,$car_price,$car_an,$car_trans,$car_autoradio,$car_sit,$partener_id);
+    $stmt->bind_param('sssssssssssisssii',$car_name,$car_description,$car_type,$car_km,$car_gps,$image_name1,$image_name2,$image_name3,$image_name4,$car_date_drop,$car_status,$car_price,$car_an,$car_trans,$car_autoradio,$car_sit,$partener_id);
 
     if($stmt->execute()){
         header('location:products.php?product_created=Product has been created successfully');
