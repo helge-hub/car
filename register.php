@@ -33,7 +33,7 @@ if(isset($_POST['register'])){
  
 
 
-  move_uploaded_file($image1,"assets/imgs/".$image_name1);
+  move_uploaded_file($image1,"/assets/imgs/".$image_name1);
  if($password !== $ConfirmPassword){
   header('location: register.php?error=passwords don\'t match');
  
