@@ -66,10 +66,7 @@ if(isset($_POST['register'])){
 // if account was created successfully
  if ($stmt->execute()){
 
-  $_SESSION['user_id'] = $user_id;
-  $_SESSION['user_email'] = $email;
-  $_SESSION['user_name'] = $name;
-  $_SESSION['logged_in'] = true;
+ 
 
   //sen maail
 
@@ -104,7 +101,7 @@ require 'phpmailer/src/SMTP.php';
     $mail->send();
 
 
-  header('location:account.php?regsiter_success=You registered successfully');
+  header('location:login.php?regsiter_success=You registered successfully');
 
 //account not be created
  }else{
