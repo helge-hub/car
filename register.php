@@ -24,7 +24,7 @@ if(isset($_POST['register'])){
  $ConfirmPassword = $_POST['confirmPassword'];
  $password_reset =0;
  
- $image1 = $_FILES['image1']['tmp'];
+ $image1 = $_FILES['image1']['tmp_name'];
    
 
  // $file_name = $_FILES['image1']['name'];
