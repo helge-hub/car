@@ -242,6 +242,135 @@ require 'phpmailer/src/SMTP.php';
 }
 
 
+if(isset($_POST['book_btn_cash'])){
+
+
+    $reservation_date = date("Ymd");;//date du jour
+    
+    $reservation_pickup1 = $_POST['reservation_date'];
+    $reservation_pickup= date("Ymd", strtotime($reservation_pickup1));
+    $durtion1 = $_POST['duration'];
+    $durtion = $durtion1." days";
+    
+
+    $date=date_create($reservation_pickup);
+date_add($date,date_interval_create_from_date_string($durtion));
+$datedrop= date_format($date,"Ymd");
+$reservation_date_drop =$datedrop;
+
+    $carId= $car_id;
+    $user_id = $_SESSION['user_id'];
+    $eservation_status = "encours";
+    $reservation_time = $_POST['time'];
+    $location_price = $_POST['location_price'];
+    $amount = $location_price*$durtion1;
+    
+    $description= $_POST['description'];
+
+
+    $stmt4 = $conn->prepare("SELECT * FROM cars WHERE car_id=? LIMIT 1");
+    $stmt4->bind_param("i",$car_id);
+  
+    $stmt4->execute();
+    $cars4 = $stmt4->get_result();
+    while($row = $cars->fetch_assoc()){
+        $price_car =$row['car_price'];
+    }
+    $total = $price_car*$durtion1;
+
+
+
+    $stmt = $conn->prepare("INSERT INTO reservation (reservation_date, reservation_date_drop, reservation_pickup, car_id, user_id, reservation_status, heure_pickup, duration, description,amount)
+                                                  VALUES(?,?,?,?,?,?,?,?,?,?)");
+
+    $stmt->bind_param('sssiissssi',$reservation_date,$reservation_date_drop,$reservation_pickup,$carId,$user_id,$eservation_status,$reservation_time,$durtion1,$description,$amount);
+
+    if($stmt->execute()){
+    
+        // get id reservation max
+            $stmt5 = $conn->prepare("SELECT Max(reservation_id)AS idmax FROM reservation WHERE user_id=?");
+            $stmt5->bind_param("i",$_SESSION['user_id']);
+            $stmt5->execute();
+            $idMax = $stmt5->get_result();
+            while($row1 = $idMax->fetch_assoc()){
+                $reservation_idmax =$row1['idmax'];
+            }
+
+        //end to get id reservation code
+        $id_transaction = rand();
+      
+        $_SESSION['car_date_drop']=$reservation_date_drop;
+        $_SESSION['reservation_id']=$reservation_idmax;
+        $_SESSION['car_id']=$car_id;
+        $_SESSION['sub']=$amount;
+        $_SESSION['trans']=$id_transaction;
+//mail for customer
+
+require 'phpmailer/src/Exception.php';
+require 'phpmailer/src/PHPMailer.php';
+require 'phpmailer/src/SMTP.php';
+
+
+
+    $mail = new PHPMailer(true);
+
+    $mail->isSMTP();
+    $mail->Host = 'smtp.gmail.com';
+    $mail->SMTPAuth = true;
+    $mail->Username = 'gabeyes241@gmail.com';
+    $mail->Password = 'uyms aryw rqbm lxro';
+    $mail->SMTPSecure = 'ssl';
+    $mail->Port = 465;
+
+
+    $mail->setFrom('gabeyes241@gmail.com');
+
+    $mail->addAddress($_SESSION['user_email']);
+
+    $mail->isHTML(true);
+
+    $mail->Subject = 'Reservation voiture';
+    $mail->Body = '<p>Cher utilisateur <span style="color:green;">TAMICARS</span> <br> Merci pour la reservation de votre voiture : <span style="font-weight:blod;">'.$car_name
+    .'</span> </p><br>
+    <p>Si vous ne l\'avez pas effectuer cette action, ignorez et supprimer cet email. </p><br>
+    <p> Equipe <span style="font-weight:blod;">Tomicars</span></p>';
+
+    $mail->send();
+
+// mail for tomicars
+
+    $mail1 = new PHPMailer(true);
+
+    $mail1->isSMTP();
+    $mail1->Host = 'smtp.gmail.com';
+    $mail1->SMTPAuth = true;
+    $mail1->Username = 'gabeyes241@gmail.com';
+    $mail1->Password = 'uyms aryw rqbm lxro';
+    $mail1->SMTPSecure = 'ssl';
+    $mail1->Port = 465;
+
+
+    $mail1->setFrom($_SESSION['user_email'],$_SESSION['user_name']);
+
+    $mail1->addAddress('gabeyes241@gmail.com');
+
+    $mail1->isHTML(true);
+
+    $mail1->Subject = 'Reservation voiture';
+    $mail1->Body = '<p>Cher <span style="color:green;">TAMICARS</span> <br> Le client : <span style="font-weight:blod;">'.$_SESSION['user_name']
+    .'</span>  a effectué une reservation du vehicule : '.$car_name.'</p><br>
+    <p>Merci de bien vouloir le contacter afin de proceder a la confirmation.choix du paiement par cash </p><br>
+    <p> Equipe Technique <span style="font-weight:blod;">Tomicars</span></p>';
+
+    $mail1->send();
+            
+        header('location:singpay.php');
+
+    }else{
+        header('location:products.php?product_failed=Product Error occured, try again');
+    }
+}
+
 
 
 
@@ -487,6 +616,7 @@ require 'phpmailer/src/SMTP.php';
                             </div>
                         </div>
                         <button class="btn btn-block btn-success py-3" name="book_btn">Reserver maintenant</button>
+                        <button class="btn btn-block  btn-primary py-3" name="book_btn_cash">Cash /24h</button>
                     </div>
                 </div>
             </div>

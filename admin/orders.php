@@ -64,10 +64,11 @@ if(isset($_GET['page_no'])  && $_GET['page_no'] != ""){
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+   
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
-
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
@@ -115,7 +116,8 @@ if(isset($_GET['page_no'])  && $_GET['page_no'] != ""){
                             <th scope="col">Date de récuperation</th>
                             <th scope="col">Date de dépôt</th>
                             <th scope="col">Modifier</th>
-                            <th scope="col">Supprimer</th>
+                            <th scope="col">confirmer</th>
+                            <th scope="col">Doc</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -130,8 +132,9 @@ if(isset($_GET['page_no'])  && $_GET['page_no'] != ""){
                             <td><?php echo date("d/m/Y", strtotime($order['reservation_pickup'])) ; ?></td>
                             <td><?php echo date("d/m/Y", strtotime($order['reservation_date_drop'])) ; ?></td>
                             <td><a class="btn btn-primary" href="edit_order.php?order_id=<?php echo $order['reservation_id'] ; ?>"><i class="fas fa-pen fa-sm"></i></a></td>
-                            <td><a class="btn btn-danger" href=""><i class="fas fa-trash fa-sm"></i></a></td>
-                            </tr>
+                            <td><a class="btn btn-success" href="edit_order_check.php?id=<?php echo $order['car_id'] ; ?>&res_id=<?php echo $order['reservation_id'];?>&date_drop=<?php  echo $order['reservation_date_drop'];?>"><i class="fas fa-check fa-sm"></i></a></td>
+                            <td><a data-id='<?php echo $order['reservation_id']; ?>' class="userinfo"><i class="fa fa-eye"></i></a></td>
+                        </tr>
                             <?php    } ?>
                         </tbody>
                     </table>
@@ -170,6 +173,44 @@ if(isset($_GET['page_no'])  && $_GET['page_no'] != ""){
 
             </div>
             <!-- End of Main Content -->
+            <form action="" method="post">
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Permis de conduire</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+       
+      </div>
+    </div>
+  </div>
+</div>
+</form>
+
+
+        <script type='text/javascript'>
+            $(document).ready(function(){
+                $('.userinfo').click(function(){
+                    var userid = $(this).data('id');
+                    $.ajax({
+                        url: 'ajaxfile2.php',
+                        type: 'post',
+                        data: {userid: userid},
+                        success: function(response){ 
+                            $('.modal-body').html(response); 
+                            $('#exampleModalCenter').modal('show'); 
+                        }
+                    });
+                });
+            });
+            </script>
 
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
@@ -210,7 +251,9 @@ if(isset($_GET['page_no'])  && $_GET['page_no'] != ""){
                 </div>
             </div>
         </div>
-    </div>
+
+
+   
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>

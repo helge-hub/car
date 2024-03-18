@@ -161,13 +161,23 @@ height: auto;">
                                 </select>
                             </div>
                         </div>
+                        <div class="row">
+                            
+                        
                             <div class="col-6 form-group">
                                 <div class="number" id="nbrs">
                                     <input type="number" name="duration" class="form-control p-4 datetimepicker-input" placeholder="Nombre de jours"
                                         data-target="#nbrs" />
                                 </div>
                             </div>
-                        </div>
+
+                            <div class="col-6 form-group">
+                                    <label>Permis de conduire</label>
+                                    <input type="file" class="form-control" id="image1"  name="image1" placeholder="image 1" required>
+                                </div>
+
+                            </div>
+                        
                         <div class="form-group">
                             <textarea class="form-control py-3 px-4"name="description" rows="3" placeholder="Description spéciale" required="required"></textarea>
                         </div>

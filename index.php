@@ -167,7 +167,7 @@ require 'phpmailer/src/SMTP.php';
                         <div class="d-flex align-items-center justify-content-center flex-shrink-0 bg-success ml-n4 mr-4" style="width: 100px; height: 100px;">
                             <i class="fa fa-2x fa-headset text-secondary"></i>
                         </div>
-                        <h4 class="text-uppercase m-0">24/7 Support de location</h4>
+                        <a href="https://wa.me/+971525151942"><h4  class="text-uppercase m-0">24/7 Support de location</h4></a>
                     </div>
                 </div>
                 <div class="col-lg-4 mb-2">
@@ -175,7 +175,10 @@ require 'phpmailer/src/SMTP.php';
                         <div class="d-flex align-items-center justify-content-center flex-shrink-0 bg-success ml-n4 mr-4" style="width: 100px; height: 100px;">
                             <i class="fa fa-2x fa-car text-secondary"></i>
                         </div>
-                        <h4 class="text-light text-uppercase m-0">Reservation immédiate </h4>
+                        <form action="account.php" method="post">
+
+                            <button class="btn btn-link" type="submit" name="btn_all"><h4 class="text-light text-uppercase m-0">Reservation immédiate </h4></button>
+                        </form>
                     </div>
                 </div>
                 <div class="col-lg-4 mb-2">
@@ -207,7 +210,8 @@ require 'phpmailer/src/SMTP.php';
                             <h1 class="display-2 text-white mt-n2 m-0">01</h1>
                         </div>
                         <h4 class="text-uppercase mb-3">Location</h4>
-                        <p class="m-0">Kasd dolor no lorem nonumy sit labore tempor at justo rebum rebum stet, justo elitr dolor amet sit sea sed</p>
+                        <p class="m-0"><i class="fa fa-solid fa-phone"></i> +241 077037650</p>
+                        <p class="m-0"><i class="fa fa-solid fa-house"></i> Centre, ville rue walker 1234</p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 mb-2">
@@ -219,7 +223,8 @@ require 'phpmailer/src/SMTP.php';
                             <h1 class="display-2 text-white mt-n2 m-0">02</h1>
                         </div>
                         <h4 class="text-uppercase mb-3">location materiels</h4>
-                        <p class="m-0">Kasd dolor no lorem nonumy sit labore tempor at justo rebum rebum stet, justo elitr dolor amet sit sea sed</p>
+                        <p class="m-0"><i class="fa fa-solid fa-phone"></i> +241 077037650</p>
+                        <p class="m-0"><i class="fa fa-solid fa-house"></i> Centre, ville rue walker 1234</p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 mb-2">
@@ -231,7 +236,8 @@ require 'phpmailer/src/SMTP.php';
                             <h1 class="display-2 text-white mt-n2 m-0">03</h1>
                         </div>
                         <h4 class="text-uppercase mb-3">Transport colis</h4>
-                        <p class="m-0">Kasd dolor no lorem nonumy sit labore tempor at justo rebum rebum stet, justo elitr dolor amet sit sea sed</p>
+                        <p class="m-0"><i class="fa fa-solid fa-phone"></i> +241 077037650</p>
+                        <p class="m-0"><i class="fa fa-solid fa-house"></i> Centre, ville rue walker 1234</p>
                     </div>
                 </div>
                 <!-- <div class="col-lg-4 col-md-6 mb-2">

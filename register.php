@@ -24,7 +24,16 @@ if(isset($_POST['register'])){
  $ConfirmPassword = $_POST['confirmPassword'];
  $password_reset =0;
  
+ $image1 = $_FILES['image1']['tmp_name'];
+   
 
+ // $file_name = $_FILES['image1']['name'];
+
+  $image_name1 = $telephone."1.jpg";
+ 
+
+
+  move_uploaded_file($image1,"assets/imgs/".$image_name1);
  if($password !== $ConfirmPassword){
   header('location: register.php?error=passwords don\'t match');
  
@@ -50,9 +59,9 @@ if(isset($_POST['register'])){
   header('location: register.php?error=user with this email already exists');
  }else{
 
- $stmt = $conn->prepare("INSERT INTO users (user_name,user_email,user_password,mobile,password_reset)
-                    VALUES(?,?,?,?,?)");
-  $stmt->bind_param('sssss',$name,$email,md5($password),$telephone,$password_reset);
+ $stmt = $conn->prepare("INSERT INTO users (user_name,user_email,user_password,mobile,password_reset,user_identity)
+                    VALUES(?,?,?,?,?,?)");
+  $stmt->bind_param('ssssss',$name,$email,md5($password),$telephone,$password_reset,$image_name1);
 
 // if account was created successfully
  if ($stmt->execute()){
@@ -284,6 +293,26 @@ input[type=text] {
   -webkit-border-radius: 5px 5px 5px 5px;
   border-radius: 5px 5px 5px 5px;
 }
+input[type=file] {
+  background-color: #f6f6f6;
+  border: none;
+  color: #0d0d0d;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 5px;
+  width: 85%;
+  border: 2px solid #f6f6f6;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -ms-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  -webkit-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px;
+}
 input[type=password] {
   background-color: #f6f6f6;
   border: none;
@@ -446,13 +475,15 @@ input[type=text]:placeholder {
     </div>
 
     <!-- Login Form -->
-    <form id="register-form" method="post">
+    <form id="register-form" enctype="multipart/form-data" method="post">
     <p style="color:red;"><?php if(isset($_GET['error'])){ echo $_GET['error']; } ?></p>
       <input type="text" id="name" class="fadeIn second" name="name" placeholder="Entrer votre nom ...">
       <input type="text" id="login" class="fadeIn second" name="email" placeholder="Entrer votre email ...">
       <input type="password" id="password" class="fadeIn third" name="password" placeholder="Entrer votre mot de passe...">
       <input type="password" id="confirmpassword" class="fadeIn third" name="confirmPassword" placeholder="Confirmer votre mot de passe...">
-      <input type="text" id="phone" class="fadeIn third" name="phone" placeholder="Entrer votre numero de téléphone...">
+      <input type="text" id="phone" class="fadeIn third" name="phone" placeholder="Entrer votre numero de téléphone...">                 
+      <label>Télécharger une piece d'identité</label>
+      <input type="file" class="fadeIn third" id="image1"  name="image1" placeholder="charger votre CNI" required>                         
       <input type="submit" name="register" class="fadeIn fourth" value="Valider">
     </form>
 

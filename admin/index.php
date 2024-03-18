@@ -99,7 +99,7 @@ $total_customers = $stmt2->get_result();
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
-
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -335,7 +335,7 @@ $total_customers = $stmt2->get_result();
                                         <td><?php echo $product['user_email'];  ?></td>                        
                                         <td><?php echo $product['mobile']; ?></td>
                                         <td>
-                                        <a href="#" class="modifier" title="Settings" data-toggle="tooltip"><i class="fa fa-pen">&#xE8B8;</i></a>
+                                        <a data-id='<?php echo $product['user_id']; ?>' class="userinfo"><i class="fa fa-eye"></i></a>
                                         </td>
                                         </tr>
                                         <?php  } ?>
@@ -597,6 +597,55 @@ $total_customers = $stmt2->get_result();
             </div>
         </div>
     </div>
+
+
+        <!-- start display info customers modal -->
+
+
+        <form action="" method="post">
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">PIECE D'IDENTITE</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+       
+      </div>
+    </div>
+  </div>
+</div>
+</form>
+
+
+        <script type='text/javascript'>
+            $(document).ready(function(){
+                $('.userinfo').click(function(){
+                    var userid = $(this).data('id');
+                    $.ajax({
+                        url: 'ajaxfile1.php',
+                        type: 'post',
+                        data: {userid: userid},
+                        success: function(response){ 
+                            $('.modal-body').html(response); 
+                            $('#exampleModalCenter').modal('show'); 
+                        }
+                    });
+                });
+            });
+            </script>
+
+
+        <!-- end display -->
+
+
+
     <script>
   const ctx = document.getElementById('myChart');
 

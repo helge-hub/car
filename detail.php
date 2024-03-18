@@ -288,7 +288,7 @@ if(isset($_POST['search'])){
                         </div>
                         <div class="form-group">
                             <div class="time" id="time1" data-target-input="nearest">
-                                <input type="text" class="form-control p-4 datetimepicker-input" placeholder="Pickup Time"
+                                <input type="text" class="form-control p-4 datetimepicker-input" placeholder="heure de recupération"
                                     data-target="#time1" data-toggle="datetimepicker" required>
                             </div>
                         </div>

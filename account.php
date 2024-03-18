@@ -59,6 +59,18 @@ if(!isset($_SESSION['logged_in'])){
   
   
     }
+  if(isset($_POST['btn_all'])){
+  
+     
+      $stmt2 = $conn->prepare("SELECT COUNT(*) from cars  where 1");
+      $stmt2->execute();
+      $stmt2->bind_result($num_rows);
+      $stmt2->store_result();
+      $stmt2->fetch();
+      $_SESSION['nbrs']=3;
+  
+  
+    }
 
   
   
@@ -106,6 +118,16 @@ $reservation_date_drop =$datedrop;
   $location_price = $_POST['location_price'];
   $description= $_POST['description'];
   $amount =$location_price*$durtion1;
+  $image1 = $_FILES['image1']['tmp_name'];
+  $id_permis = rand();
+
+ // $file_name = $_FILES['image1']['name'];
+
+  $image_name1 = $id_permis."1.jpg";
+ 
+
+
+  move_uploaded_file($image1,"assets/imgs/".$image_name1);
 
 
   $stmt4 = $conn->prepare("SELECT * FROM cars WHERE car_id=? LIMIT 1");
@@ -121,10 +143,10 @@ $reservation_date_drop =$datedrop;
 
 
 
-  $stmt = $conn->prepare("INSERT INTO reservation (reservation_date, reservation_date_drop, reservation_pickup, car_id, user_id, reservation_status, heure_pickup, duration, description,amount)
-                                                VALUES(?,?,?,?,?,?,?,?,?,?)");
+  $stmt = $conn->prepare("INSERT INTO reservation (reservation_date, reservation_date_drop, reservation_pickup, car_id, user_id, reservation_status, heure_pickup, duration, description,amount,permis)
+                                                VALUES(?,?,?,?,?,?,?,?,?,?,?)");
 
-  $stmt->bind_param('sssiissssi',$reservation_date,$reservation_date_drop,$date_reservation_final,$carId,$user_id,$eservation_status,$reservation_time,$durtion1,$description,$amount);
+  $stmt->bind_param('sssiissssis',$reservation_date,$reservation_date_drop,$date_reservation_final,$carId,$user_id,$eservation_status,$reservation_time,$durtion1,$description,$amount,$image_name1);
 
   if($stmt->execute()){
 
@@ -589,6 +611,7 @@ if($_SESSION['nbrs']==1){ ?>
 <td><?php echo $product['duration']; ?> jour(s)</td>
 <td>
 <a href="paid.php?id=<?php echo $product['car_id']; ?>" class="modifier" title="proceder au paiement" data-toggle="tooltip"><i class="fa fa-money-bill">&#xE8B8;</i></a>
+<a href="paid.php?id=<?php echo $product['car_id']; ?>" class="modifier" title="proceder au paiement" data-toggle="tooltip"><i class="fa fa-credit-card">&#xE8B8;</i></a>
 </td>
 </tr>
 <?php  } ?>
