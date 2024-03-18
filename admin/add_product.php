@@ -146,7 +146,7 @@ $partener = $stmt1->get_result();
                                     <select class="form-select form-select-lg mb-3" aria-label="Large select example" name="car_partener">
                                     
                                         <?php  foreach($partener as $partener){  ?>
-                                        <option  value="<?php echo $partener['partener_id']; ?>"><?php  echo $category['partener_name'] ;?></option>
+                                        <option  value="<?php echo $partener['partener_id']; ?>"><?php  echo $partener['partener_name'] ;?></option>
                                         <?php  } ?>
                                      </select>
                                 </div>
